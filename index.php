@@ -60,22 +60,30 @@ if(isset($_POST['InputTemp']) && isset($_POST['InputUnit']) && isset($_POST['Out
     }
 }
 
+// stickify for text input
+// takes the input name value as argument
+
+function stickify($postElement){
+    if(isset($_POST[$postElement])){
+        echo htmlspecialchars($_POST[$postElement]);
+    }
+}
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Temperature Converter</title>
+        <meta charset="UTF-8">
     </head>
     <body>
         <form action="" method="POST">
-            <p>Temp to convert: <input type="text" name="InputTemp"/>
+            <p>Temp to convert: <input type="text" name="InputTemp" value="<?php stickify('InputTemp');?>"/>
                 <select name="InputUnit">
                     <option value="F" selected>F</option>
                     <option value="C">C</option>
                     <option value="K">K</option>
                 </select>
-
             </p>
             <p>Convert to:
                 <select name="OutputUnit">
