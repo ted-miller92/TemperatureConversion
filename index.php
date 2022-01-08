@@ -26,16 +26,31 @@ if(isset($_POST['InputTemp']) && isset($_POST['InputUnit']) && isset($_POST['Out
             }
         }
         // if InputUnit is C
-            
-            // convert to F
-            
-            // convert to K
-
+        if($InputUnit == 'C'){
+            if($OutputUnit == 'F'){ 
+                // convert to C
+                $OutputTemp = number_format($InputTemp * (9/5) + 32, 2);
+            }elseif($OutputUnit == 'K'){
+                // convert to K
+                $OutputTemp = number_format($InputTemp + 273.15, 2);
+            }else{
+                // no conversion
+                $OutputTemp = number_format($InputTemp, 2);
+            }
+        }
         // if InputUnit is K
-            
-            // convert to F
-
-            // convert to C
+        if($InputUnit == 'K'){
+            if($OutputUnit == 'F'){ 
+                // convert to F
+                $OutputTemp = number_format($InputTemp - 273.15, 2);
+            }elseif($OutputUnit == 'C'){
+                // convert to C
+                $OutputTemp = number_format(($InputTemp - 273.15) * (9/5), 2);
+            }else{
+                // no conversion
+                $OutputTemp = number_format($InputTemp, 2);
+            }
+        }    
         
         // $OutputTemp $OutputUnit
     }else{
@@ -72,7 +87,7 @@ if(isset($_POST['InputTemp']) && isset($_POST['InputUnit']) && isset($_POST['Out
             <button type="submit">Convert</button>
         </form>
         <div id="results">
-            <p>Converted Temperature:<?php 
+            <p>Converted Temperature: <?php 
             if(isset($OutputTemp)){
                 echo ''.$OutputTemp.' degrees '.$OutputUnit.'';
             }
