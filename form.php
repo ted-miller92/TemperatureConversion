@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * valivateRadio
+ *
+ * @param  string $key radio's name
+ * @param  string $message error message
+ * @param  array $errorMsgs for keeping the error message
+ * @return array $errorMsgs result
+ */
 function valivateRadio($key, $message, $errorMsgs)
 {
   if (!isset($_POST[$key])) {
@@ -8,6 +16,13 @@ function valivateRadio($key, $message, $errorMsgs)
   return $errorMsgs;
 }
 
+/**
+ * valivateText
+ *
+ * @param  string $value
+ * @param  array $errorMsgs for keeping the error message
+ * @return array $errorMsgs result
+ */
 function valivateText($value, $errorMsgs)
 {
   if ($value === "") {
@@ -18,6 +33,11 @@ function valivateText($value, $errorMsgs)
   return $errorMsgs;
 }
 
+/**
+ * valivateForm
+ *
+ * @return array error messages
+ */
 function valivateForm()
 {
   $errorMsgs = [];

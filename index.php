@@ -8,7 +8,7 @@ if (count($errorMsgs) === 0) {
   $output = convertTemperature(
     $_POST["input_unit"],
     $_POST["output_unit"],
-    $_POST["input_temp_value"]
+    (float) $_POST["input_temp_value"]
   );
 }
 ?>
