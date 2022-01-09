@@ -1,0 +1,55 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper {
+  padding: 10px;
+}
+.wrapper .title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.wrapper .container {
+  padding: 10px;
+}
+.wrapper .container p {
+  padding: 10px 0px;
+}
+.wrapper .container input[type="radio"],
+.wrapper .container label {
+  cursor: pointer;
+}
+.wrapper .container label {
+  margin-right: 15px;
+}
+
+.wrapper .container input[type="text"] {
+  padding: 5px;
+}
+
+.wrapper .container input[type="submit"] {
+  padding: 5px 15px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.success {
+  font-size: 20px;
+  color: #167c1e;
+  font-weight: 600;
+  padding: 10px 0px;
+}
+.error {
+  color: #e74d4d;
+  font-weight: 600;
+  font-style: italic;
+}
+.error p {
+  padding: 5px 0px;
+}
