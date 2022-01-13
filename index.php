@@ -1,105 +1,64 @@
 <?php
-// checking that all fields are filled out/set
-if(isset($_POST['InputTemp']) && isset($_POST['InputUnit']) && isset($_POST['OutputUnit'])){
-    // checking that input temperature is a number
-    if(is_numeric($_POST['InputTemp']) == "integer"){
-        // echo '<span> Data is correct type, perform calculations</span>';
-        // Declare variables
-        $InputTemp = number_format($_POST['InputTemp'], 2);
-        $InputUnit = $_POST['InputUnit'];
-        $OutputUnit = $_POST['OutputUnit'];
-        $OutputTemp;
 
-        // calculations go here
+include('includes/temperatureConversion.php');
+include('includes/validation.php');
 
-        // if InputUnit is F
-        if($InputUnit == 'F'){
-            if($OutputUnit == 'C'){ 
-                // convert F to C
-                $OutputTemp = number_format(($InputTemp - 32) * (5/9), 2);
-            }elseif($OutputUnit == 'K'){
-                // convert to K
-                $OutputTemp = number_format(($InputTemp - 32) * (5/9) + 273.15, 2);
-            }else{
-                // no conversion
-                $OutputTemp = number_format($InputTemp, 2);
-            }
-        }
-        // if InputUnit is C
-        if($InputUnit == 'C'){
-            if($OutputUnit == 'F'){ 
-                // convert to C
-                $OutputTemp = number_format($InputTemp * (9/5) + 32, 2);
-            }elseif($OutputUnit == 'K'){
-                // convert to K
-                $OutputTemp = number_format($InputTemp + 273.15, 2);
-            }else{
-                // no conversion
-                $OutputTemp = number_format($InputTemp, 2);
-            }
-        }
-        // if InputUnit is K
-        if($InputUnit == 'K'){
-            if($OutputUnit == 'F'){ 
-                // convert to F
-                $OutputTemp = number_format($InputTemp - 273.15, 2);
-            }elseif($OutputUnit == 'C'){
-                // convert to C
-                $OutputTemp = number_format(($InputTemp - 273.15) * (9/5), 2);
-            }else{
-                // no conversion
-                $OutputTemp = number_format($InputTemp, 2);
-            }
-        }    
-        
-        // $OutputTemp $OutputUnit
-    }else{
-        // echo number_format($_POST['InputTemp'], 2);
-        
-        echo '<span>Data is incorrect type. Please enter a number</span>';
-    }
+$errors = validateForm();
+$output_value = null;
+
+if(count($errors) === 0){
+    $output_value = convertTemperature(
+        $_POST['input_unit'], 
+        $_POST['output_unit'], 
+        (float)$_POST['input_value']
+    );
 }
-
-// stickify for text input
-// takes the input name value as argument
-
-function stickify($postElement){
-    if(isset($_POST[$postElement])){
-        echo htmlspecialchars($_POST[$postElement]);
-    }
-}
-
 ?>
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Temperature Converter</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Temperature Conversion</title>
+</head>
+<body>
+    <main>
         <form action="" method="POST">
-            <p>Temp to convert: <input type="text" name="InputTemp" value="<?php stickify('InputTemp');?>"/>
-                <select name="InputUnit">
-                    <option value="F" selected>F</option>
-                    <option value="C">C</option>
-                    <option value="K">K</option>
-                </select>
-            </p>
-            <p>Convert to:
-                <select name="OutputUnit">
-                    <option value="F">F</option>
-                    <option value="C">C</option>
-                    <option value="K">K</option>
-                </select>
-            </p>
-            <button type="submit">Convert</button>
+            <legend>Temperature Conversion</legend>
+                <fieldset>
+                <p>Temperature to convert: <input type="text" name="input_value" value="<?php stickify_text('input_value');?>"/>&deg;</p>
+                <p>From:    
+                    <select name="input_unit">
+                        <option value="F" <?php stickify_select('input_unit', 'F');?> >Fahrenheit</option>
+                        <option value="C" <?php stickify_select('input_unit', 'C');?> >Celsius</option>
+                        <option value="K" <?php stickify_select('input_unit', 'K');?> >Kelvin</option>
+                    </select>
+                    to:
+                    <select name="output_unit">
+                        <option value="F" <?php stickify_select('output_unit', 'F');?> >Fahrenheit</option>
+                        <option value="C" <?php stickify_select('output_unit', 'C');?> >Celsius</option>
+                        <option value="K" <?php stickify_select('output_unit', 'K');?> >Kelvin</option>
+                    </select>
+                </p>
+                <button type="submit">Convert</button>
+            </fieldset>
         </form>
-        <div id="results">
-            <p>Converted Temperature: <?php 
-            if(isset($OutputTemp)){
-                echo ''.$OutputTemp.' degrees '.$OutputUnit.'';
-            }
-            ?></p>
+        <div class="errors">
+            <?php foreach($errors as $key => $value):?>
+                <p><?= $value; ?></p>
+            <?php endforeach; ?>
         </div>
-    </body>
-</html>
+        <div class="success">
+            <p>
+            <?php if(isset($_POST['input_value']) && isset($_POST['input_unit']) && isset($_POST['output_unit'])){
+                // X degrees x is Y degrees y
+                echo "{$_POST['input_value']}&deg;{$_POST['input_unit']} is $output_value&deg;{$_POST['output_unit']}";
+            }
+            ?>
+            </p>
+        </div>
+    </main>
+</body>
