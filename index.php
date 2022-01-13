@@ -53,7 +53,7 @@ if(count($errors) === 0){
         </div>
         <div class="success">
             <p>
-            <?php if(isset($_POST['input_value']) && isset($_POST['input_unit']) && isset($_POST['output_unit'])){
+            <?php if(isset($_POST['input_value']) && count($errors) === 0){
                 // X degrees x is Y degrees y
                 echo "{$_POST['input_value']}&deg;{$_POST['input_unit']} is $output_value&deg;{$_POST['output_unit']}";
             }

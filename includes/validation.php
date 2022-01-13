@@ -1,6 +1,7 @@
 <?php
 // validation.php
 
+// function validateForm will check if server method is POST, then check for an input, then check that input is numeric
 function validateForm(){
     $errors = [];
 
@@ -14,16 +15,16 @@ function validateForm(){
     return $errors;
 }
 
-// stickify for text input
-// takes the input name  as argument
+// stickify for text input makes text input sticky on refresh/submit
+// takes the input name as parameter
 function stickify_text($postElement){
     if(isset($_POST[$postElement])){
         echo htmlspecialchars($_POST[$postElement]);
     }
 }
 
-// stickify for select options
-// takes input name as arg1, input value as arg2
+// stickify for select options makes select options sticky on refresh/submit
+// takes input name as parameter1, input value as parameter2
 function stickify_select($inputName, $inputValue){
     if(isset($_POST[$inputName]) && $_POST[$inputName] == $inputValue){
         echo 'selected';

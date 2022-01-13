@@ -3,7 +3,7 @@
 function convertTemperature($input_unit, $output_unit, $value){
     $conversion = $input_unit . '_to_' . $output_unit;
 
-    if($input_unit == $output_unit){
+    if($input_unit == $output_unit){ // no need to convert
         $value = $value;
     }else{
         switch($conversion){
