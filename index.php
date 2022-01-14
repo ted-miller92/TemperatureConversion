@@ -10,7 +10,7 @@ if(count($errors) === 0){
     $output_value = convertTemperature(
         $_POST['input_unit'], 
         $_POST['output_unit'], 
-        (float)$_POST['input_value']
+        $_POST['input_value']
     );
 }
 ?>

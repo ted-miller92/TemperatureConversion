@@ -6,9 +6,10 @@ function validateForm(){
     $errors = [];
 
     if($_SERVER["REQUEST_METHOD"] === "POST"){
-        if(empty($_POST['input_value'])){
+        if(!isset($_POST['input_value'])){
             array_push($errors, 'Please enter a temperature');
-        }elseif(!is_numeric($_POST['input_value'])){
+        }
+        if(!is_numeric($_POST['input_value'])){
             array_push($errors, 'Please enter a numeric value');
         }
     }
