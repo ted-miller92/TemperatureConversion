@@ -1,27 +1,59 @@
 /* General Styles */
 body{
     background:lightgray;
+    font-family:Arial, Helvetica, sans-serif;
 }
-.errors{
-    width:600px;
-    margin:0 auto;
-    color: #FF0000;
+main{
+    margin:10vh 0;
 }
 form{
-    width:600px;
+    width:800px;
     margin:0 auto;
+    text-align:center;
+    padding:10px;
+    border-radius:10px;
+    border:3px solid #0b30a8;
+    background-color:white;
+}
+select, input{
+    font-size:1em;
+}
+button{
+    font-size:1.5em;
 }
 legend{
-    font-size:2em;
+    font-size:3em;
 }
 p{
     margin:5px 0;
+    font-size:1.7em;
 }
 fieldset{
     padding:10px;
 }
-.success{
-    width:600px;
-    margin:0 auto;
+.success p{
+    width:800px;
+    margin:10px auto;
+    padding:10px;
     text-align:center;
+    border:3px solid green;
+    color:darkgreen;
+    border-radius:10px;
+    background-color:#b3ee9c;
+}
+.errors p{
+    width:800px;
+    margin:10px auto;
+    padding:10px;
+    text-align:center;
+    border:3px solid red;
+    border-radius:10px;
+    background-color:#ecbdbd;
+}
+footer{
+    width:100%;
+    position:fixed;
+    bottom:0;
+    text-align:center;
+    padding:10px;
 }
